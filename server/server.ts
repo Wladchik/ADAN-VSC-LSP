@@ -115,7 +115,7 @@ async function validate_text_document(text_document: TextDocument): Promise<void
     let problems = 0;
     let diagnostics: Diagnostic[] = [];
 
-    while ((m = pattern.exec(text)) && problems < (settings.max_number_of_problems || 9999)) {
+    while ((m = pattern.exec(text)) && problems < 1000) {
         problems++;
 
         let diagnostic: Diagnostic = {
