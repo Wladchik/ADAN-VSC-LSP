@@ -1,8 +1,6 @@
 import {
     createConnection,
     TextDocuments,
-    Diagnostic,
-    DiagnosticSeverity,
     ProposedFeatures,
     InitializeParams,
     DidChangeConfigurationNotification,
@@ -78,24 +76,6 @@ server_connection.onDidChangeConfiguration(change => {
         );
     }
 });
-
-function get_document_settings(resource: string): Thenable<ServerSettings> {
-    if (!has_configuration_capability) {
-        return Promise.resolve(global_settings);
-    }
-
-    let result = document_settings.get(resource);
-    if (!result) {
-        result = server_connection.workspace.getConfiguration({
-            scopeUri: resource,
-            section: "adanLanguageServer"
-        });
-
-        document_settings.set(resource, result);
-    }
-
-    return result;
-}
 
 documents.onDidClose(element => {
     document_settings.delete(element.document.uri);
