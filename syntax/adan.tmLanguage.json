@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "ADAN",
+  "scopeName": "source.adn",
   "patterns": [
     { "include": "#comments" },
     { "include": "#strings" },
@@ -35,16 +36,39 @@
         }
       ]
     },
+    
     "strings": {
       "patterns": [
         {
           "name": "string.quoted.double.adn",
           "begin": "\"",
           "end": "\"",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.adn" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.adn" }
+          },
           "patterns": [
+            { "include": "#stringEscapes" },
             {
-              "name": "constant.character.escape.adn",
-              "match": "\\\\."
+              "name": "meta.template.expression.adn",
+              "begin": "\\$\\{",
+              "end": "\\}",
+              "beginCaptures": {
+                "0": { "name": "punctuation.definition.template.begin.adn" }
+              },
+              "endCaptures": {
+                "0": { "name": "punctuation.definition.template.end.adn" }
+              },
+              "patterns": [
+                { "include": "#strings" },
+                { "include": "#numbers" },
+                { "include": "#operators" },
+                { "include": "#types" },
+                { "include": "#identifiers" },
+                { "include": "#punctuation" }
+              ]
             }
           ]
         },
@@ -52,15 +76,28 @@
           "name": "string.quoted.single.adn",
           "begin": "'",
           "end": "'",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.adn" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.adn" }
+          },
           "patterns": [
-            {
-              "name": "constant.character.escape.adn",
-              "match": "\\\\."
-            }
+            { "include": "#stringEscapes" }
           ]
         }
       ]
     },
+
+    "stringEscapes": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.adn",
+          "match": "\\\\(n|r|t|0|\"|'|\\\\|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4})"
+        }
+      ]
+    },
+
     "numbers": {
       "patterns": [
         {
@@ -73,60 +110,48 @@
         }
       ]
     },
+
     "functionCall": {
       "patterns": [
         {
           "name": "meta.function-call.adn",
           "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
           "captures": {
-            "1": {
-              "name": "entity.name.function.adn"
-            }
+            "1": { "name": "entity.name.function.adn" }
           }
         }
       ]
     },
+
     "programDeclaration": {
       "patterns": [
         {
           "name": "meta.program.adn",
           "match": "\\b(program)(::)(void|int|string|char|bool|float|null)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
           "captures": {
-            "1": {
-              "name": "storage.type.class.adn"
-            },
-            "2": {
-              "name": "punctuation.accessor.adn"
-            },
-            "3": {
-              "name": "storage.type.adn"
-            },
-            "4": {
-              "name": "entity.name.function.adn"
-            }
+            "1": { "name": "storage.type.class.adn" },
+            "2": { "name": "punctuation.accessor.adn" },
+            "3": { "name": "storage.type.adn" },
+            "4": { "name": "entity.name.function.adn" }
           }
         }
       ]
     },
+
     "includeStatement": {
       "patterns": [
         {
           "name": "meta.include.adn",
           "match": "^\\s*(include)\\s+([a-zA-Z_][a-zA-Z0-9_\\.]*)(;)?",
           "captures": {
-            "1": {
-              "name": "keyword.control.import.adn"
-            },
-            "2": {
-              "name": "entity.name.type.module.adn"
-            },
-            "3": {
-              "name": "punctuation.terminator.adn"
-            }
+            "1": { "name": "keyword.control.import.adn" },
+            "2": { "name": "entity.name.type.module.adn" },
+            "3": { "name": "punctuation.terminator.adn" }
           }
         }
       ]
     },
+
     "controlKeywords": {
       "patterns": [
         {
@@ -143,6 +168,7 @@
         }
       ]
     },
+
     "storageKeywords": {
       "patterns": [
         {
@@ -151,6 +177,7 @@
         }
       ]
     },
+
     "types": {
       "patterns": [
         {
@@ -158,11 +185,16 @@
           "match": "\\b(string|int|void|char|bool|float)\\b"
         },
         {
+          "name": "constant.language.boolean.adn",
+          "match": "\\b(true|false)\\b"
+        },
+        {
           "name": "constant.language.null.adn",
-          "match": "\\b(null|true|false)\\b"
+          "match": "\\bnull\\b"
         }
       ]
     },
+
     "operators": {
       "patterns": [
         {
@@ -171,11 +203,11 @@
         },
         {
           "name": "keyword.operator.assignment.adn",
-          "match": "(=)"
+          "match": "="
         },
         {
           "name": "keyword.operator.arithmetic.adn",
-          "match": "(\\+|\\-|\\*|/|%)"
+          "match": "(\\+|-|\\*|/|%)"
         },
         {
           "name": "keyword.operator.logical.adn",
@@ -183,6 +215,7 @@
         }
       ]
     },
+
     "punctuation": {
       "patterns": [
         {
@@ -211,6 +244,7 @@
         }
       ]
     },
+
     "identifiers": {
       "patterns": [
         {
@@ -219,6 +253,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.adn"
+  }
 }
