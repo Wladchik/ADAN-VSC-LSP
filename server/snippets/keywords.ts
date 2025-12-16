@@ -34,7 +34,7 @@ export const snippet_keywords: CompletionItem[] = [
         detail: "Create a loop that iterates over a range of values.",
         documentation: "```adan\nfor (initialization; condition; increment) {\n    // Code to repeat\n}\n```",
 
-        insertText: "for (${1:int i = 0}; ${2:i < 10}; ${3:i++}) {\n\t${0}\n}",
+        insertText: "for (${1:i::int = 0}; ${2:i < 10}; ${3:i++}) {\n\t${0}\n}",
         insertTextFormat: InsertTextFormat.Snippet
     },
     {
@@ -86,9 +86,9 @@ export const snippet_keywords: CompletionItem[] = [
         label: "init",
         kind: CompletionItemKind.Keyword,
         detail: "Define starting point of a ADAN program.",
-        documentation: "```adan\ninclude adan.io;\n\nprogram::int main() {\n    return 0;\n}\n```",
+        documentation: "```adan\ninclude adan.io;\n\nprogram::int main() {\n\treturn 0;\n}\n```",
 
-        insertText: "include adan.io;\n\nprogram::int main() {\n\treturn 0;\n}",
+        insertText: "include adan.io;\n\nprogram::void main() {\n\treturn;\n}",
         insertTextFormat: InsertTextFormat.Snippet
     }
 ];
