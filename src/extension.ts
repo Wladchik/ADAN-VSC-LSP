@@ -16,6 +16,7 @@ import {
     ServerOptions,
     TransportKind
 } from "vscode-languageclient/node";
+import * as vscode from 'vscode';
 
 let language_client: LanguageClient;
 
@@ -49,6 +50,39 @@ export function activate(context: ExtensionContext) {
 
     language_client = new LanguageClient("adanLanguageServer", "ADAN LSP", server_options, client_options);
     language_client.start();
+
+    const formatter = vscode.languages.registerDocumentFormattingEditProvider('adan', {
+        provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+            const edits: vscode.TextEdit[] = [];
+            let indentLevel = 0;
+
+            for (let i = 0; i < document.lineCount; i++) {
+                const line = document.lineAt(i);
+                const trimmed = line.text.trim();
+
+                if (trimmed.length === 0) {
+                    continue;
+                }
+
+                if (trimmed.startsWith('}')) {
+                    indentLevel = Math.max(indentLevel - 1, 0);
+                }
+
+                const newText = ' '.repeat(indentLevel * 4) + trimmed;
+                if (newText !== line.text) {
+                    edits.push(vscode.TextEdit.replace(line.range, newText));
+                }
+
+                if (trimmed.endsWith('{')) {
+                    indentLevel++;
+                }
+            }
+
+            return edits;
+        }
+    });
+
+    context.subscriptions.push(formatter);
 }
 
 export function deactivate(): Thenable<void> | undefined {
