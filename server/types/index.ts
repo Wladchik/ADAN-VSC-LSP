@@ -7,8 +7,18 @@ export interface ServerSettings {
 export interface SymbolReference {
     uri: string;
     range: Range;
+    parens?: string;
+}
+
+export interface SymbolEntry {
+    baseName: string;
+    fullName: string;
+    type?: string;
+    args?: string;
+    definitions: SymbolReference[];
+    usages: SymbolReference[];
 }
 
 export interface SymbolTable {
-    [symbol: string]: SymbolReference[];
+    [symbol: string]: SymbolEntry;
 }

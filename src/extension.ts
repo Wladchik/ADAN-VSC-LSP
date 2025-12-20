@@ -1,10 +1,3 @@
-// 
-//  Learn how to write your own language server/client as a Visual Studio Code
-//   extension.
-// 
-//  https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
-// 
-
 import * as path from "node:path";
 import {
     workspace,
@@ -24,8 +17,8 @@ export function activate(context: ExtensionContext) {
     let server_module = context.asAbsolutePath(path.join("out", "server", "server.js"));
     let debug_options = {
         execArgv: ["--nolazy", "--inspect=6009"]
-    }; // `--inspect=6009` runs hte server in Node's Inspector mode so VS Code can attach to the server for debugging.
-
+    };
+    
     let server_options: ServerOptions = {
         run: {
             module: server_module,
@@ -95,6 +88,7 @@ export function activate(context: ExtensionContext) {
         }
     });
 
+    
     context.subscriptions.push(formatterService, renameService);
 }
 
