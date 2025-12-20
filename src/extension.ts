@@ -44,14 +44,17 @@ export function activate(context: ExtensionContext) {
             language: "adan"
         }],
         synchronize: {
-            fileEvents: workspace.createFileSystemWatcher("**/*.adn")
+            fileEvents: [
+                workspace.createFileSystemWatcher("**/*.adn"),
+                workspace.createFileSystemWatcher("**/*.adan")
+            ]
         }
     };
 
     language_client = new LanguageClient("adanLanguageServer", "ADAN LSP", server_options, client_options);
     language_client.start();
 
-    const formatter = vscode.languages.registerDocumentFormattingEditProvider('adan', {
+    const formatterService = vscode.languages.registerDocumentFormattingEditProvider('adan', {
         provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
             const edits: vscode.TextEdit[] = [];
             let indentLevel = 0;
@@ -82,7 +85,17 @@ export function activate(context: ExtensionContext) {
         }
     });
 
-    context.subscriptions.push(formatter);
+    const renameService = vscode.languages.registerRenameProvider('adan', {
+        provideRenameEdits(document, position, newName, token) {
+            return language_client.sendRequest('textDocument/rename', {
+                textDocument: { uri: document.uri.toString() },
+                position,
+                newName
+            });
+        }
+    });
+
+    context.subscriptions.push(formatterService, renameService);
 }
 
 export function deactivate(): Thenable<void> | undefined {

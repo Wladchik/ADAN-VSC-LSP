@@ -9,8 +9,8 @@ import {
     TextDocumentSyncKind,
     InitializeResult,
 } from "vscode-languageserver/node";
-import { TextDocument } from "vscode-languageserver-textdocument";
-import { ServerSettings } from "./settings.js";
+import { TextDocument, Range, Position } from "vscode-languageserver-textdocument";
+import { ServerSettings, SymbolTable, SymbolReference } from "./types/index.js";
 import { snippet_keywords } from "./snippets/keywords.js";
 import { snippet_types } from "./snippets/types.js";
 import { snippet_constants } from "./snippets/constants.js";
@@ -18,7 +18,7 @@ import { snippet_generic_snippets } from "./snippets/generic.js";
 
 let server_connection = createConnection(ProposedFeatures.all);
 let documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
-
+let symbolTable: SymbolTable = {};
 let has_configuration_capability: boolean = false;
 let has_workspace_folder_capability: boolean = false;
 let has_diagnostic_related_information_capability: boolean = false;
@@ -36,7 +36,9 @@ server_connection.onInitialize((params: InitializeParams) => {
             completionProvider: {
                 resolveProvider: true,
                 triggerCharacters: [".", ":", " "]
-            }
+            },
+            referencesProvider: true,
+            renameProvider: true
         }
     };
 
@@ -118,6 +120,79 @@ server_connection.onCompletion((text_document_position: TextDocumentPositionPara
 
 server_connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
     return item;
+});
+
+const getWordRangeAtPosition = (document: TextDocument, position: Position): Range | null => {
+    const text = document.getText();
+    const lines = text.split(/\r?\n/);
+    const line = lines[position.line];
+    if (!line) {
+        return null;
+    }
+
+    let start = position.character;
+    let end = position.character;
+
+    while (start > 0 && /\w/.test(line[start - 1])) {
+        start--;
+    }
+    
+    while (end < line.length && /\w/.test(line[end])) {
+        end++;
+    }
+
+    if (start === end) {
+        return null;
+    }
+
+    return {
+        start: { line: position.line, character: start },
+        end: { line: position.line, character: end }
+    };
+}
+
+documents.onDidChangeContent(change => {
+    const document = change.document;
+    const text = document.getText();
+    symbolTable = {}; // reset
+
+    const words = text.match(/\w+/g) || [];
+    words.forEach(word => {
+        symbolTable[word] = [];
+        let match;
+        const regex = new RegExp(`\\b${word}\\b`, "g");
+        while ((match = regex.exec(text)) !== null) {
+            const start = document.positionAt(match.index);
+            const end = document.positionAt(match.index + word.length);
+            symbolTable[word].push({ uri: document.uri, range: { start, end } });
+        }
+    });
+});
+
+server_connection.onRenameRequest(params => {
+    const doc = documents.get(params.textDocument.uri);
+    if (!doc) {
+        return null;
+    }
+
+    const wordRange = getWordRangeAtPosition(doc, params.position);
+    if (!wordRange) {
+        return null;
+    }
+
+    const oldName = doc.getText(wordRange);
+    const refs = symbolTable[oldName] || [];
+
+    const changes: { [uri: string]: { range: Range; newText: string }[] } = {};
+    refs.forEach(ref => {
+        if (!changes[ref.uri]) {
+            changes[ref.uri] = [];
+        }
+        
+        changes[ref.uri].push({ range: ref.range, newText: params.newName });
+    });
+
+    return { changes };
 });
 
 documents.listen(server_connection);
