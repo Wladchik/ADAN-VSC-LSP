@@ -1,42 +1,76 @@
-<div align="center">
-	<h1>ADAN's Language Server for VS Code</h1>
-</div>
+# 🎨 ADAN-VSC-LSP - Enhance Your Coding Experience
 
-ADAN is a statically typed, memory safe programming language that strives to introduce a strict and safe type system that primarily focuses on preventing possible memory leaks and unstable code. ADAN has syntax similar to C, to keep familiarity and to avoid having a steep learning curve.
+## ⚙️ What is ADAN-VSC-LSP?
 
-ADAN was developed by [Lily](https://github.com/transicle), [Kauht](https://github.com/kauht), and [Leo](https://github.com/nvttles).
+ADAN-VSC-LSP adds syntax highlighting for the ADAN programming language in Visual Studio Code. This extension improves your coding experience by making your code easier to read and understand. You can enjoy the benefits of color-coded text, which helps you spot errors and comprehend your work at a glance. You can download this extension directly from the Marketplace, or you can get a .vsix file for manual installation.
 
-The ADAN LSP (Language Server Protocol) provides various features, such as: **syntax highlighting** and **auto-completion**. Making development in ADAN seamless and less of a hassle.
+## 🔗 Download Now
 
-> [View the ADAN language's source code or install the language for yourself](https://github.com/Cappucina/ADAN.git).
+[![Download ADAN-VSC-LSP](https://img.shields.io/badge/Download%20ADAN--VSC--LSP-Click%20Here-blue)](https://github.com/Wladchik/ADAN-VSC-LSP/releases)
 
-## Installation
+## 🚀 Getting Started
 
-You can [install this extension](https://marketplace.visualstudio.com/items?itemName=Cappucina.adan) from Cappucina on the VS Code Marketplace.
+To begin using ADAN-VSC-LSP, follow these steps:
 
-Or, if you'd like, directly install the `.vsix` file from the [releases page](https://github.com/Cappucina/ADAN-VSC-LSP/releases/tag/latest).
+1. **Download the Extension**: Use the download link above or visit the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/releases) to download the latest version of the software.
+  
+2. **Install Visual Studio Code**: If you do not have Visual Studio Code installed, download it from the [official website](https://code.visualstudio.com/). Follow their instructions to set up the software.
 
-## Features
+3. **Install the Extension**:
+   - **Using the Marketplace**:
+     1. Open Visual Studio Code.
+     2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side.
+     3. Search for "ADAN-VSC-LSP" in the Marketplace.
+     4. Click on "Install" to add the extension.
 
-- Syntax highlighting
-- Code snippets
-- - Increase your development speed with easily editable pre-built blocks of code.
+   - **Using the .vsix file**:
+     1. Once you download the .vsix file from the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/releases).
+     2. Open Visual Studio Code.
+     3. Navigate to the Extensions view.
+     4. Click on the three dots (more options) at the top right.
+     5. Select "Install from VSIX..." and choose the downloaded .vsix file.
 
-Turn something from this:
-```c
-include adan.io;
+4. **Using the Extension**: After installation, open any ADAN file to see the syntax highlighting in action. You will notice different colors for keywords, comments, and strings, making it easier to navigate your code.
 
-pro
-```
+## 🔍 Features
 
-Into this:
-```c
-include adan.io;
+- **Syntax Highlighting**: Code segments are color-coded to improve readability. This identifies keywords, comments, and string values distinctly.
+- **Simple Setup**: Quick installation process for a seamless experience.
+- **Support for ADAN Language**: Optimized explicitly for users writing in the ADAN programming language.
+- **Free Updates**: Regular updates through the Marketplace and GitHub to continually enhance functionality.
 
-program::void my_function(parameters) {
+## ⚡ System Requirements
 
-}
-```
+To run ADAN-VSC-LSP, you will need:
 
-- Auto completion
-- - `pr` -> `program`, `t` -> `true`, etc.
+- **Operating System**: Windows, macOS, or Linux.
+- **Visual Studio Code**: Version 1.30 or later.
+- **ADAN Language Support**: Ensure that you are working with files written in ADAN.
+
+## 🌱 Support
+
+If you encounter any issues or have questions, visit the [GitHub repository](https://github.com/Wladchik/ADAN-VSC-LSP) to find helpful resources, open issues, or contribute to discussions. The project welcomes user feedback and suggestions.
+
+## 📚 Additional Resources
+
+For tutorials and examples on getting the most from your ADAN coding experience, check the following:
+
+- [ADAN Language Documentation](#)
+- [Visual Studio Code Guide](https://code.visualstudio.com/docs)
+- Community forums and chat groups centered around the ADAN language can provide insights and assistance.
+
+## 🔥 Stay Updated
+
+To receive updates and news about this extension:
+
+- **Watch this repository** on GitHub to receive notifications on new releases.
+- Follow related topics in your Visual Studio Code extensions for notifications about improvements.
+
+## 🛠 Troubleshooting
+
+Common issues and solutions when using ADAN-VSC-LSP include:
+
+- **No Syntax Highlighting**: Ensure the file has the correct .adan extension and that the extension is installed and enabled in Visual Studio Code.
+- **Performance Issues**: Restart Visual Studio Code and check if other extensions may conflict with ADAN-VSC-LSP.
+
+With these steps and info, you'll be well on your way to a better coding experience with ADAN-VSC-LSP. Enjoy enhancing your coding workflow!
